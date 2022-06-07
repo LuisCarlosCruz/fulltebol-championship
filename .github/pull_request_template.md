@@ -12,4 +12,4 @@
 - [x] O comando `docker-compose up --build` roda sem erros no banco, no _back_ e no _front_
 - [x] Listei todas as dependências que usei extras (joi, boom, express-async-errors...) no backend em `app/backend/packages.npm`
 - [x] A _migration_ `app/backend/src/database/migrations/99999999999999-create-z.js` roda sem problemas quando se executa `npm run db:reset`
-- [ ] Se já fiz outras _migrations_ e _models_, renomeei as seeders, retirando os `_` do nome dos arquivos, mudando o padrão de `20211116145440-teams.js_` para `20211116145440-teams.js`
+- [x] Se já fiz outras _migrations_ e _models_, renomeei as seeders, retirando os `_` do nome dos arquivos, mudando o padrão de `20211116145440-teams.js_` para `20211116145440-teams.js`
