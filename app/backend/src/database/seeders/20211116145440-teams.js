@@ -7,8 +7,7 @@ module.exports = {
      */
     await queryInterface.bulkInsert(
       'teams',
-      [
-        {
+      [{
           team_name: 'Avaí/Kindermann',
         },
         {
@@ -56,8 +55,7 @@ module.exports = {
         {
           team_name: 'São Paulo',
         },
-      ],
-      {},
+      ], {},
     );
   },
 
