@@ -3,6 +3,7 @@ import db from '.';
 // import OtherModel from './OtherModel';
 
 class User extends Model {
+  public id: number;
   public username: string;
   public roles: string;
   public email: string;

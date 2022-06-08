@@ -1,7 +1,15 @@
-import { Request, Response, Router } from 'express';
+import { Router } from 'express';
+import validateEmail from '../middlewares/validateEmailMiddleware';
+import loginController from '../controllers/loginController';
+import validadePassword from '../middlewares/validatePasswordMiddleware';
 
 const router = Router();
 
-router.get('/', (_req: Request, res: Response) => res.status(200).send('yurao'));
+router.post(
+  '/login',
+  validateEmail,
+  validadePassword,
+  loginController,
+);
 
 export default router;
