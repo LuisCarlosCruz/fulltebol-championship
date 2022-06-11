@@ -1,26 +1,28 @@
 import { Request, Response, NextFunction } from 'express';
 import { StatusCodes } from 'http-status-codes';
 
+const message = 'Incorrect email or password';
+
 const validadePassword = (req: Request, res: Response, next: NextFunction) => {
   const { password } = req.body;
 
   if (!password) {
     return res
-      .status(StatusCodes.BAD_REQUEST)
-      .send({ message: '"password" is not allowed to be empty' });
+      .status(StatusCodes.UNAUTHORIZED)
+      .send({ message });
   }
 
   if ((typeof password) !== 'string') {
     return res
-      .status(StatusCodes.BAD_REQUEST)
-      .send({ message: '"password" must be a valid password' });
+      .status(StatusCodes.UNAUTHORIZED)
+      .send({ message });
   }
 
   const min = 6;
   if (password.length < min) {
     return res
-      .status(StatusCodes.BAD_REQUEST)
-      .send({ message: '"password" length must be characters long' });
+      .status(StatusCodes.UNAUTHORIZED)
+      .send({ message });
   }
 
   next();
