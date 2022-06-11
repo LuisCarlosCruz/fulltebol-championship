@@ -13,13 +13,11 @@ const verifyUser = async (email: string, _password: string) => {
 
   const token = await genToken({ username });
 
-  console.log(token);
-
   return {
     user: {
       id: existUser.id,
       username: existUser.username,
-      role: existUser.roles,
+      role: existUser.role,
       email: existUser.email,
     },
     token,

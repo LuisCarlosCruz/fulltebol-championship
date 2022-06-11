@@ -6,8 +6,8 @@ const validadeEmail = (req: Request, res: Response, next: NextFunction) => {
 
   if (!email) {
     return res
-      .status(StatusCodes.BAD_REQUEST)
-      .send({ message: '"email" is not allowed to be empty' });
+      .status(StatusCodes.NON_AUTHORITATIVE_INFORMATION)
+      .send({ message: 'Incorrect email or password' });
   }
 
   const verifyEmail = (data: string) => {
@@ -17,8 +17,8 @@ const validadeEmail = (req: Request, res: Response, next: NextFunction) => {
 
   if (verifyEmail(email) === false) {
     return res
-      .status(StatusCodes.BAD_REQUEST)
-      .send({ message: '"email" must be a valid email' });
+      .status(StatusCodes.NON_AUTHORITATIVE_INFORMATION)
+      .send({ message: 'Incorrect email or password' });
   }
   next();
 };
