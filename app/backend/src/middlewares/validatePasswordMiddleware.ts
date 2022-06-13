@@ -8,8 +8,8 @@ const validadePassword = (req: Request, res: Response, next: NextFunction) => {
 
   if (!password) {
     return res
-      .status(StatusCodes.UNAUTHORIZED)
-      .send({ message });
+      .status(StatusCodes.BAD_REQUEST)
+      .send({ message: 'All fields must be filled' });
   }
 
   if ((typeof password) !== 'string') {

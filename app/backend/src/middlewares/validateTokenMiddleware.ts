@@ -1,31 +1,32 @@
 import { Request, Response, NextFunction } from 'express';
 import { StatusCodes } from 'http-status-codes';
-import * as jwt from 'jsonwebtoken';
-import * as fs from 'fs';
 import * as dotenv from 'dotenv';
+import { validateToken } from '../utils/authToken';
 
 dotenv.config();
 
-const validateToken = async (req: Request, res: Response, next: NextFunction) => {
-  const token = req.headers.authorization;
+const authorization = (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const token = req.headers.authorization;
 
-  if (!token) {
-    return res.status(StatusCodes.UNAUTHORIZED).send({ message: 'Token not found' });
-  }
+    if (!token) return res.status(StatusCodes.UNAUTHORIZED).send({ message: 'Token not found' });
 
-  const keyDB = fs.readFileSync('jwt.evaluation.key', { encoding: 'utf8' });
+    const tokenOk = validateToken(token);
 
-  const decoded = await jwt.verify(token, keyDB, (err) => {
-    if (err) {
+    if (!tokenOk) {
       return res
-        .status(StatusCodes.UNAUTHORIZED)
-        .json({ message: 'Failed to authenticate token.' });
+        .status(StatusCodes.UNAUTHORIZED).send({ message: 'User unauthorized' });
     }
-  });
 
-  req.body.user = decoded;
+    req.body.infoUser = tokenOk;
 
-  next();
+    console.log(tokenOk);
+
+    next();
+  } catch (err) {
+    console.log(err);
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send('ERROR INTERNO');
+  }
 };
 
-export default validateToken;
+export default authorization;

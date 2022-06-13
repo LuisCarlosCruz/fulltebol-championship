@@ -4,12 +4,10 @@ import { StatusCodes } from 'http-status-codes';
 const validadeEmail = (req: Request, res: Response, next: NextFunction) => {
   const { email } = req.body;
 
-  const message = 'Incorrect email or password';
-
   if (!email) {
     return res
-      .status(StatusCodes.UNAUTHORIZED)
-      .send({ message });
+      .status(StatusCodes.BAD_REQUEST)
+      .send({ message: 'All fields must be filled' });
   }
 
   const verifyEmail = (data: string) => {
@@ -20,7 +18,7 @@ const validadeEmail = (req: Request, res: Response, next: NextFunction) => {
   if (verifyEmail(email) === false) {
     return res
       .status(StatusCodes.UNAUTHORIZED)
-      .send({ message });
+      .send({ message: 'Incorrect email or password' });
   }
   next();
 };
