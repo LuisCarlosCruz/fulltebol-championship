@@ -3,6 +3,7 @@ import validateEmail from '../middlewares/validateEmailMiddleware';
 import { getRoleUser, loginController } from '../controllers/loginController';
 import validadePassword from '../middlewares/validatePasswordMiddleware';
 import validateToken from '../middlewares/validateTokenMiddleware';
+import getAllTeams from '../controllers/teamsController';
 
 const router = Router();
 
@@ -17,6 +18,11 @@ router.post(
   validateEmail,
   validadePassword,
   loginController,
+);
+
+router.get(
+  '/teams',
+  getAllTeams,
 );
 
 export default router;
