@@ -8,7 +8,7 @@ export const getAllTeamsService = async () => {
 export const getByIdTeamService = async (id: string) => {
   const team = await Teams.findOne({ where: { id }, raw: true });
 
-  if (!team) return undefined;
+  if (!team) return null;
 
   return team;
 };

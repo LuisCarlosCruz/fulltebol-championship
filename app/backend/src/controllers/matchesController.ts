@@ -1,13 +1,15 @@
 import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
+import getAllMatchesService from '../services/matchesService';
 
-const getAllMatchesController = async (req: Request, res: Response) => {
+const getAllMatches = async (req: Request, res: Response) => {
   try {
-    return res.status(StatusCodes.OK).send({ message: 'MATCHESall' });
+    const allMatches = await getAllMatchesService();
+    return res.status(StatusCodes.OK).send(allMatches);
   } catch (err) {
     console.log(err);
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({ message: 'Erro Interno' });
   }
 };
 
-export default getAllMatchesController;
+export default getAllMatches;

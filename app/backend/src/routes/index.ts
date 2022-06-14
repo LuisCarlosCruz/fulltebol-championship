@@ -4,7 +4,7 @@ import { getRoleUser, login } from '../controllers/loginController';
 import validadePassword from '../middlewares/validatePasswordMiddleware';
 import validateToken from '../middlewares/validateTokenMiddleware';
 import { getAllTeams, getByIdTeam } from '../controllers/teamsController';
-import getAllMatchesController from '../controllers/matchesController';
+import getAllMatches from '../controllers/matchesController';
 
 const router = Router();
 
@@ -33,7 +33,7 @@ router.get(
 
 router.get(
   '/matches',
-  getAllMatchesController,
+  getAllMatches,
 );
 
 export default router;
