@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import { getAllTeamsService, getByIdTeamService } from '../services/teamsServiceService';
 
-export const getAllTeamsController = async (_req: Request, res: Response) => {
+export const getAllTeams = async (_req: Request, res: Response) => {
   try {
     const allTeams = await getAllTeamsService();
     return res.status(StatusCodes.OK).json(allTeams);
