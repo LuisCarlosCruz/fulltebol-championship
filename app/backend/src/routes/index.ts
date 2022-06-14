@@ -3,7 +3,7 @@ import validateEmail from '../middlewares/validateEmailMiddleware';
 import { getRoleUser, loginController } from '../controllers/loginController';
 import validadePassword from '../middlewares/validatePasswordMiddleware';
 import validateToken from '../middlewares/validateTokenMiddleware';
-import getAllTeams from '../controllers/teamsController';
+import { getAllTeamsController, getByIdTeam } from '../controllers/teamsController';
 
 const router = Router();
 
@@ -22,7 +22,12 @@ router.post(
 
 router.get(
   '/teams',
-  getAllTeams,
+  getAllTeamsController,
+);
+
+router.get(
+  '/teams/:id',
+  getByIdTeam,
 );
 
 export default router;
