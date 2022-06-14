@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import loginService from '../services/loginService';
 
-const loginController = async (req: Request, res: Response) => {
+export const loginController = async (req: Request, res: Response) => {
   try {
     const { email, password } = req.body;
 
@@ -21,4 +21,12 @@ const loginController = async (req: Request, res: Response) => {
   }
 };
 
-export default loginController;
+export const getRoleUser = (req: Request, res: Response) => {
+  try {
+    const { role } = req.body.infoUser;
+    return res.status(200).json(role);
+  } catch (err) {
+    console.log(err);
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({ message: 'Erro Interno' });
+  }
+};

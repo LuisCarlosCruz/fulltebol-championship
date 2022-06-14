@@ -20,8 +20,6 @@ const authorization = (req: Request, res: Response, next: NextFunction) => {
 
     req.body.infoUser = tokenOk;
 
-    console.log(tokenOk);
-
     next();
   } catch (err) {
     console.log(err);
