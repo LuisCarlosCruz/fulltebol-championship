@@ -1,45 +1,45 @@
 import { Router } from 'express';
-import validateEmail from '../middlewares/validateEmailMiddleware';
-import { getRoleUser, login } from '../controllers/loginController';
-import validadePassword from '../middlewares/validatePasswordMiddleware';
-import validateToken from '../middlewares/validateTokenMiddleware';
-import { getAllTeams, getByIdTeam } from '../controllers/teamsController';
-import { createMatchInProgress, getAllMatches } from '../controllers/matchesController';
+// import validateEmail from '../middlewares/validateEmailMiddleware';
+import { login } from '../controllers/loginController';
+// import validadePassword from '../middlewares/validatePasswordMiddleware';
+// import validateToken from '../middlewares/validateTokenMiddleware';
+// import { getAllTeams, getByIdTeam } from '../controllers/teamsController';
+// import { createMatchInProgress, getAllMatches } from '../controllers/matchesController';
 
 const router = Router();
 
-router.get(
-  '/login/validate',
-  validateToken,
-  getRoleUser,
-);
+// router.get(
+//   '/login/validate',
+//   // validateToken,s
+//   getRoleUser,
+// );
 
 router.post(
   '/login',
-  validateEmail,
-  validadePassword,
+  // validateEmail,
+  // validadePassword,
   login,
 );
 
-router.get(
-  '/teams',
-  getAllTeams,
-);
+// router.get(
+//   '/teams',
+//   getAllTeams,
+// );
 
-router.get(
-  '/teams/:id',
-  getByIdTeam,
-);
+// router.get(
+//   '/teams/:id',
+//   getByIdTeam,
+// );
 
-router.get(
-  '/matches',
-  getAllMatches,
-);
+// router.get(
+//   '/matches',
+//   getAllMatches,
+// );
 
-router.post(
-  '/matches',
-  validateToken,
-  createMatchInProgress,
-);
+// router.post(
+//   '/matches',
+//   // validateToken,
+//   createMatchInProgress,
+// );
 
 export default router;

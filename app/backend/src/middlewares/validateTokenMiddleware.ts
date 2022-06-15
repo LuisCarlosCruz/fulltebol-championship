@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import * as dotenv from 'dotenv';
-import { validateToken } from '../utils/authToken';
+// import { validateToken } from '../utils/authToken';
 
 dotenv.config();
 
@@ -11,14 +11,14 @@ const authorization = (req: Request, res: Response, next: NextFunction) => {
 
     if (!token) return res.status(StatusCodes.UNAUTHORIZED).send({ message: 'Token not found' });
 
-    const tokenOk = validateToken(token);
+    // const tokenOk = validateToken(token);
 
-    if (!tokenOk) {
-      return res
-        .status(StatusCodes.UNAUTHORIZED).send({ message: 'User unauthorized' });
-    }
+    // if (!tokenOk) {
+    //   return res
+    //     .status(StatusCodes.UNAUTHORIZED).send({ message: 'User unauthorized' });
+    // }
 
-    req.body.infoUser = tokenOk;
+    // req.infoUser = tokenOk;
 
     next();
   } catch (err) {

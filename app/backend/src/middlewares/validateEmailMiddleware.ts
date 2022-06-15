@@ -7,7 +7,7 @@ const validadeEmail = (req: Request, res: Response, next: NextFunction) => {
   if (!email) {
     return res
       .status(StatusCodes.BAD_REQUEST)
-      .send({ message: 'All fields must be filled' });
+      .json({ message: 'All fields must be filled' });
   }
 
   const verifyEmail = (data: string) => {
@@ -18,7 +18,7 @@ const validadeEmail = (req: Request, res: Response, next: NextFunction) => {
   if (verifyEmail(email) === false) {
     return res
       .status(StatusCodes.UNAUTHORIZED)
-      .send({ message: 'Incorrect email or password' });
+      .json({ message: 'Incorrect email or password' });
   }
   next();
 };
