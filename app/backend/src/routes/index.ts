@@ -4,7 +4,7 @@ import { getRoleUser, login } from '../controllers/loginController';
 import validadePassword from '../middlewares/validatePasswordMiddleware';
 import validateToken from '../middlewares/validateTokenMiddleware';
 import { getAllTeams, getByIdTeam } from '../controllers/teamsController';
-import getAllMatches from '../controllers/matchesController';
+import { createMatchInProgress, getAllMatches } from '../controllers/matchesController';
 
 const router = Router();
 
@@ -34,6 +34,12 @@ router.get(
 router.get(
   '/matches',
   getAllMatches,
+);
+
+router.post(
+  '/matches',
+  validateToken,
+  createMatchInProgress,
 );
 
 export default router;

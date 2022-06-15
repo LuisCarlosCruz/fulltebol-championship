@@ -1,7 +1,7 @@
 import Matches from '../database/models/matches';
 import Teams from '../database/models/teams';
 
-const getAllMatchesService = async (filter: unknown) => {
+export const getAllMatchesService = async (filter: unknown) => {
   const allMatches = await Matches.findAll({
     include: [
       { model: Teams, as: 'teamHome', attributes: ['teamName'] },
@@ -16,4 +16,8 @@ const getAllMatchesService = async (filter: unknown) => {
   if (filter === 'false') return allMatches.filter((match) => match.inProgress === false);
 };
 
-export default getAllMatchesService;
+export const createMatchInProgressService = async (body: unknown) => {
+  const matchCreate = await Matches.create(body);
+
+  return matchCreate;
+};

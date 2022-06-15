@@ -1,16 +1,16 @@
-// import * as bcryptjs from 'bcryptjs';
+import * as bcryptjs from 'bcryptjs';
 import { genToken } from '../utils/authToken';
 import User from '../database/models/users';
 
-const verifyUser = async (email: string, _password: string) => {
+const verifyUser = async (email: string, password: string) => {
   const existUser = await User.findOne({ where: { email }, raw: true });
 
   if (!existUser) return null;
 
-  const { password: _passDB, ...infoUser } = existUser;
+  const { password: passDB, ...infoUser } = existUser;
   const { id, username, role, email: emailUser } = infoUser; // renomeando chave email
 
-  // if (!bcryptjs.compareSync(password, passDB)) return null;
+  if (!bcryptjs.compareSync(password, passDB)) return null;
 
   const token = await genToken({ id, username, role, email: emailUser });
 
