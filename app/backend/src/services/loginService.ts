@@ -1,28 +1,27 @@
-// import * as bcryptjs from 'bcryptjs';
-// import { genToken } from '../utils/authToken';
-// import User from '../database/models/users';
+import * as bcryptjs from 'bcryptjs';
+import { genToken } from '../utils/authToken';
+import User from '../database/models/users';
 
-// const verifyUser = async (email: string, password: string) => {
-//   const existUser = await User.findOne({ where: { email }, raw: true });
+const verifyUser = async (email: string, pass: string) => {
+  const existUser = await User.findOne({ where: { email }, raw: true });
 
-//   if (!existUser) return null;
+  if (!existUser) throw new Error('Incorrect email or password');
 
-//   const { password: passDB, ...infoUser } = existUser;
-//   const { id, username, role, email: emailUser } = infoUser; // renomeando chave email
+  const { id, username, role } = existUser;
 
-//   if (!bcryptjs.compareSync(password, passDB)) return null;
+  if (!bcryptjs.compareSync(pass, existUser.password)) return null;
 
-//   const token = await genToken({ id, username, role, email: emailUser });
+  const token = await genToken({ id, username, role, email });
 
-//   return {
-//     user: {
-//       id: existUser.id,
-//       username: existUser.username,
-//       role: existUser.role,
-//       email: existUser.email,
-//     },
-//     token,
-//   };
-// };
+  return {
+    user: {
+      id,
+      username,
+      role,
+      email,
+    },
+    token,
+  };
+};
 
-// export default { verifyUser };
+export default { verifyUser };
