@@ -22,7 +22,7 @@ export const createMatchInProgressService = async (body: unknown) => {
   return matchCreate;
 };
 
-export const createMatchFinishService = async (id:string) => {
+export const matchFinishService = async (id:string) => {
   const matchFinish = await Matches.update({ inProgress: false }, { where: { id } });
 
   return matchFinish;

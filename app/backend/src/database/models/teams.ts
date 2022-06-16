@@ -4,6 +4,7 @@ import Matches from './matches';
 
 class Teams extends Model {
   public teamName: string;
+  public id: number;
 }
 
 Teams.init({

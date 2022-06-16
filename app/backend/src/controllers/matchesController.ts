@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import {
-  createMatchFinishService,
+  matchFinishService,
   createMatchInProgressService,
   getAllMatchesService } from '../services/matchesService';
 
@@ -33,11 +33,10 @@ export const createMatchInProgress = async (req: Request, res: Response) => {
   }
 };
 
-export const createMatchFinish = async (req: Request, res: Response) => {
+export const matchFinish = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    await createMatchFinishService(id);
-    // return res.status(StatusCodes.OK).json(id);
+    await matchFinishService(id);
     return res.status(StatusCodes.OK).json({ message: 'Finished' });
   } catch (err: unknown) {
     console.log(err);

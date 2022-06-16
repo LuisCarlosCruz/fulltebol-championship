@@ -5,9 +5,11 @@ import validadePassword from '../middlewares/validatePasswordMiddleware';
 import validateToken from '../middlewares/validateTokenMiddleware';
 import { getAllTeams, getByIdTeam } from '../controllers/teamsController';
 import {
-  createMatchFinish,
+  matchFinish,
   createMatchInProgress,
   getAllMatches } from '../controllers/matchesController';
+import verifiTeamsEqual from '../middlewares/checkEqualTeamsMiddleware';
+import verifiTeamsExistDataBase from '../middlewares/checkExistsTeamDatabase';
 
 const router = Router();
 
@@ -37,6 +39,8 @@ router.get(
 router.post(
   '/matches',
   validateToken,
+  verifiTeamsEqual,
+  verifiTeamsExistDataBase,
   createMatchInProgress,
 );
 
@@ -47,7 +51,7 @@ router.get(
 
 router.patch(
   '/matches/:id/finish',
-  createMatchFinish,
+  matchFinish,
 );
 
 export default router;
