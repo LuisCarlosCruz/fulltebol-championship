@@ -12,7 +12,7 @@ export const login = async (req: Request, res: Response) => {
   } catch (err: unknown) {
     console.log(err);
     if (err instanceof Error) {
-      return res.status(StatusCodes.UNAUTHORIZED).send(err.message);
+      return res.status(StatusCodes.UNAUTHORIZED).json({ message: err.message });
     }
   }
 };
@@ -23,6 +23,6 @@ export const getRoleUser = (req: Request, res: Response) => {
     return res.status(200).json(role);
   } catch (err) {
     console.log(err);
-    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({ message: 'Erro Interno' });
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: 'Erro Interno' });
   }
 };

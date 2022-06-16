@@ -9,20 +9,20 @@ const validadePassword = (req: Request, res: Response, next: NextFunction) => {
   if (!password) {
     return res
       .status(StatusCodes.BAD_REQUEST)
-      .send({ message: 'All fields must be filled' });
+      .json({ message: 'All fields must be filled' });
   }
 
   if ((typeof password) !== 'string') {
     return res
       .status(StatusCodes.UNAUTHORIZED)
-      .send({ message });
+      .json({ message });
   }
 
   const min = 6;
   if (password.length < min) {
     return res
       .status(StatusCodes.UNAUTHORIZED)
-      .send({ message });
+      .json({ message });
   }
 
   next();

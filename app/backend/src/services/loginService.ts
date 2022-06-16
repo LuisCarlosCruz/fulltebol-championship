@@ -9,7 +9,9 @@ const verifyUser = async (email: string, pass: string) => {
 
   const { id, username, role } = existUser;
 
-  if (!bcryptjs.compareSync(pass, existUser.password)) return null;
+  if (!bcryptjs.compareSync(pass, existUser.password)) {
+    throw new Error('Incorrect email or password');
+  }
 
   const token = await genToken({ id, username, role, email });
 

@@ -8,10 +8,10 @@ export const getAllMatches = async (req: Request, res: Response) => {
 
     const allMatches = await getAllMatchesService(inProgress);
 
-    return res.status(StatusCodes.OK).send(allMatches);
+    return res.status(StatusCodes.OK).json(allMatches);
   } catch (err) {
     console.log(err);
-    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({ message: 'Erro Interno' });
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: 'Erro Interno' });
   }
 };
 
@@ -24,6 +24,6 @@ export const createMatchInProgress = async (req: Request, res: Response) => {
     return res.status(StatusCodes.CREATED).json(matchCreate);
   } catch (err) {
     console.log(err);
-    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({ message: 'Erro Interno' });
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: 'Erro Interno' });
   }
 };
