@@ -2,7 +2,7 @@ import { Model, DataTypes } from 'sequelize';
 import db from '.';
 // import OtherModel from './OtherModel';
 
-class Example extends Model {
+class Matches extends Model {
   public id: number;
   public homeTeam: number;
   public homeTeamGoals: number;
@@ -11,7 +11,7 @@ class Example extends Model {
   public inProgress: boolean;
 }
 
-Example.init({
+Matches.init({
   id: {
     allowNull: false,
     autoIncrement: true,
@@ -57,4 +57,4 @@ Example.init({
 // Example.hasMany(OtherModel, { foreignKey: 'campoC', as: 'campoEstrangeiroC' });
 // Example.hasMany(OtherModel, { foreignKey: 'campoD', as: 'campoEstrangeiroD' });
 
-export default Example;
+export default Matches;

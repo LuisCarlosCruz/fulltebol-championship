@@ -11,6 +11,7 @@ import {
   matchUpdate } from '../controllers/matchesController';
 import verifiTeamsEqual from '../middlewares/checkEqualTeamsMiddleware';
 import verifiTeamsExistDataBase from '../middlewares/checkExistsTeamDatabase';
+import getLeaderboard from '../controllers/leaderboardController';
 
 const router = Router();
 
@@ -58,6 +59,11 @@ router.patch(
 router.patch(
   '/matches/:id',
   matchUpdate,
+);
+
+router.get(
+  '/leaderboard/home',
+  getLeaderboard,
 );
 
 export default router;
