@@ -27,3 +27,12 @@ export const matchFinishService = async (id:string) => {
 
   return matchFinish;
 };
+
+export const updateMatchService = async (id:string, homeTeamGoals:string, awayTeamGoals:string) => {
+  const matchUpdate = await Matches.update({
+    homeTeamGoals,
+    awayTeamGoals,
+  }, { where: { id } });
+
+  return matchUpdate;
+};

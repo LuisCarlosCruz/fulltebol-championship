@@ -3,7 +3,8 @@ import { StatusCodes } from 'http-status-codes';
 import {
   matchFinishService,
   createMatchInProgressService,
-  getAllMatchesService } from '../services/matchesService';
+  getAllMatchesService,
+  updateMatchService } from '../services/matchesService';
 
 const errorMessage = { message: 'Erro Interno' };
 
@@ -39,6 +40,20 @@ export const matchFinish = async (req: Request, res: Response) => {
     await matchFinishService(id);
     return res.status(StatusCodes.OK).json({ message: 'Finished' });
   } catch (err: unknown) {
+    console.log(err);
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(errorMessage);
+  }
+};
+
+export const matchUpdate = async (req: Request, res: Response) => {
+  try {
+    const { homeTeamGoals, awayTeamGoals } = req.body;
+    const { id } = req.params;
+
+    await updateMatchService(id, homeTeamGoals, awayTeamGoals);
+
+    return res.status(StatusCodes.OK).json({ message: 'update match' });
+  } catch (err) {
     console.log(err);
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(errorMessage);
   }

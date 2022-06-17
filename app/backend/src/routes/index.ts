@@ -7,7 +7,8 @@ import { getAllTeams, getByIdTeam } from '../controllers/teamsController';
 import {
   matchFinish,
   createMatchInProgress,
-  getAllMatches } from '../controllers/matchesController';
+  getAllMatches,
+  matchUpdate } from '../controllers/matchesController';
 import verifiTeamsEqual from '../middlewares/checkEqualTeamsMiddleware';
 import verifiTeamsExistDataBase from '../middlewares/checkExistsTeamDatabase';
 
@@ -52,6 +53,11 @@ router.get(
 router.patch(
   '/matches/:id/finish',
   matchFinish,
+);
+
+router.patch(
+  '/matches/:id',
+  matchUpdate,
 );
 
 export default router;
