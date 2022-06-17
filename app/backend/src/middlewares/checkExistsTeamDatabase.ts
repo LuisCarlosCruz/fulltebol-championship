@@ -12,7 +12,7 @@ const verifiTeamsExistDataBase = async (req: Request, res: Response, next: NextF
 
   if (!awayExist || !homeExist) {
     return res
-      .status(StatusCodes.BAD_REQUEST)
+      .status(StatusCodes.NOT_FOUND)
       .json({ message: 'There is no team with such id!' });
   }
   next();
