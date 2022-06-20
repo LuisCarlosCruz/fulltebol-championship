@@ -8,7 +8,7 @@ import Teams from '../database/models/teams';
 
 import { Response } from 'superagent';
 
-import teamsMock from './payload/teamsMock';
+import teamsMock from './mocks/teamsMock';
 
 chai.use(chaiHttp);
 
@@ -56,7 +56,7 @@ describe('Team by Id - Sucess', () => {
         } as Teams);
   });
 
-  after(()=>{
+  after(() => {
     (Teams.findOne as sinon.SinonStub).restore();
   })
 
@@ -68,5 +68,27 @@ describe('Team by Id - Sucess', () => {
     expect(chaiHttpResponse.status).to.be.equal(200);
     expect(chaiHttpResponse.body).to.have.property('id');
     expect(chaiHttpResponse.body).to.have.property('teamName');
+  });
+});
+
+describe('Team by Id - Fail', () => {
+  let chaiHttpResponse: Response;
+
+  before(async () => {
+    sinon
+      .stub(Teams, "findOne")
+      .resolves(undefined as any);
+  });
+
+  after(() => {
+    (Teams.findOne as sinon.SinonStub).restore();
+  })
+
+  it('Fail to get team by id', async () => {
+    chaiHttpResponse = await chai
+       .request(app)
+       .get('/teams/99');
+
+    expect(chaiHttpResponse.status).to.be.equal(404);
   });
 });
