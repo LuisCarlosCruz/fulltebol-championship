@@ -51,6 +51,9 @@ describe('Matches: GET', () => {
   });
 });
 
+// ===============================================================
+// ===============================================================
+
 describe('Matches: POST', () => {
   describe('Sucess:', () => {
     let chaiHttpResponse: Response;
@@ -152,4 +155,54 @@ describe('Matches: POST', () => {
   });
 });
 
+describe('Matches: PATCH', () => {
+  describe('Sucess:', () => {
+    let chaiHttpResponse: Response;
 
+    before(async () => {
+      sinon
+        .stub(Matches, "update")
+        .resolves(null as any);
+    });
+  
+    after(() => {
+      (Matches.update as sinon.SinonStub).restore();
+    })
+  
+    it('successfully updates a match:', async () => {
+      chaiHttpResponse = await chai
+         .request(app)
+         .patch('/matches/1');
+  
+      expect(chaiHttpResponse.status).to.be.equal(200);
+      expect(chaiHttpResponse.body).to.be.a('object');
+      expect(chaiHttpResponse.body).to.have.property('message');
+      expect(chaiHttpResponse.body.message).to.be.equal('update match');
+    });
+  });
+
+  describe('Sucess:', () => {
+    let chaiHttpResponse: Response;
+
+    before(async () => {
+      sinon
+        .stub(Matches, "update")
+        .resolves(null as any);
+    });
+  
+    after(() => {
+      (Matches.update as sinon.SinonStub).restore();
+    })
+  
+    it('Ends match successfully:', async () => {
+      chaiHttpResponse = await chai
+         .request(app)
+         .patch('/matches/1/finish');
+  
+      expect(chaiHttpResponse.status).to.be.equal(200);
+      expect(chaiHttpResponse.body).to.be.a('object');
+      expect(chaiHttpResponse.body).to.have.property('message');
+      expect(chaiHttpResponse.body.message).to.be.equal('Finished');
+    });
+  });
+});
